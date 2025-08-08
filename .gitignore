@@ -1,0 +1,11 @@
+/garagewh/node_modules
+/garagewh/public/hot
+/garagewh/public/storage
+/garagewh/storage/*.key
+/garagewh/vendor
+/garagewh/.env
+/garagewh/.phpunit.result.cache
+/garagewh/Homestead.json
+/garagewh/Homestead.yaml
+/garagewh/npm-debug.log
+/garagewh/yarn-error.log
