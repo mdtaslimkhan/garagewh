@@ -190,21 +190,7 @@
                 	@endcanany
 				
 					@canany(['vehicle_view','vehicletype_view','vehiclebrand_view','colors_view'])
-                	<li><a><i class="fa fa-motorcycle"></i> {{ trans('app.Vehicles')}} <span class="fa fa-chevron-down"></span></a>
-                    	<ul class="nav child_menu">
-                    		@can('vehicle_view')
-                      			<li><a href="{!! url('/vehicle/list') !!}">{{ trans('app.List Vehicle')}}</a></li>
-                      		@endcan
-                      		@can('vehicletype_view')
-                      			<li><a href="{!! url('/vehicletype/list') !!}">{{ trans('app.List Vehicle Type')}}</a></li>
-                      		@endcan
-                      		@can('vehiclebrand_view')
-                      			<li><a href="{!! url('/vehiclebrand/list') !!}">{{ trans('app.List Vehicle Brand')}}</a></li>
-                      		@endcan
-                      		@can('colors_view')
-					   			<li><a href="{!! url('/color/list') !!}"> {{ trans('app.Colors')}}</a></li>
-					   		@endcan
-                    	</ul>
+                	<li><a href="{!! url('/vehicle/list') !!}"><i class="fa fa-car"></i> {{ trans('app.Vehicles')}} <span class="fa fa-chevron-down"></span></a>
                 	</li>
                 	@endcanany
 
