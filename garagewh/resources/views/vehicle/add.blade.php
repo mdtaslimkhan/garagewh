@@ -36,110 +36,59 @@
 
 							<div class="form-group" style="margin-top:20px;">
 								<div class="my-form-group">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Vehicle Type')}} <label class="color-danger">*</label></label>
-									<div class="col-md-2 col-sm-2 col-xs-12">
-										 <select class="form-control select_vehicaltype" name="vehical_id" 
-										 vehicalurl="{!! url('/vehicle/vehicaltypefrombrand') !!}" required>
-											<option value="">{{ trans('app.Select Vehicle Type')}}</option>
-										 @if(!empty($vehical_type))
-											@foreach($vehical_type as $vehical_types)
-												<option value="{{ $vehical_types->id }}">{{ $vehical_types->vehicle_type }}</option>
-											@endforeach
-										@endif
-									    </select> 
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Vehicle VIN')}} <label class="color-danger">*</label></label>
+									<div class="col-md-4 col-sm-4 col-xs-12">
+										<input type="text"  name="VIN" autocomplete="off" placeholder="VIN"  class="form-control"/>
 									</div>
-									<div class="col-md-2 col-sm-2 col-xs-12 addremove">
-										<button type="button" class="btn btn-default" data-target="#responsive-modal" data-toggle="modal">{{ trans('app.Add Or Remove')}}</button>
+									
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="my-form-group">
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Model Years')}} <label class="color-danger"></label></label>
+									<div class="col-md-4 col-sm-4 col-xs-12 input-group date" id="myDatepicker2">
+										<span class="input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+										<input type="text"  name="modelyear" autocomplete="off"  class="form-control"/>
+									</div>								
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="my-form-group">
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Name')}} <label class="color-danger">*</label></label>
+									<div class="col-md-4 col-sm-4 col-xs-12">
+									
+										<input type="text"  name="modelname" autocomplete="off" placeholder="modelname"  class="form-control"/>
+										
 									</div>
+								
 								</div>
 
-								<div class="">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Chasic No')}} <label class="color-danger"></label></label>
-									<div class="col-md-4 col-sm-4 col-xs-12">
-										<input type="text"  name="chasicno"  value="{{ old('chasicno') }}" placeholder="{{ trans('app.Enter ChasicNo')}}" maxlength="30" class="form-control">
-									</div>
-								</div>
 							</div>
 
 						    <div class="form-group">
 								<div class="my-form-group">
 									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Vehicle Brand')}} <label class="color-danger">*</label></label>
-									<div class="col-md-2 col-sm-2 col-xs-12">
-										<select class="form-control   select_vehicalbrand" name="vehicabrand" >
-											<option value="">Select Vehical Brand</option>
-										 </select> 
+									<div class="col-md-4 col-sm-4 col-xs-12">
+										<input type="text"  name="vehicabrand" autocomplete="off" placeholder="Brand"  class="form-control"/>
 									</div>
-									<div class="col-md-2 col-sm-2 col-xs-12 addremove">
-										<button type="button" class="btn btn-default" data-target="#responsive-modal-brand" data-toggle="modal">{{ trans('app.Add Or Remove')}}</button>
-									</div>
-								</div>
-
-								<div class="">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Model Years')}} <label class="color-danger"></label></label>
-									<div class="col-md-4 col-sm-4 col-xs-12 input-group date" id="myDatepicker2">
-										<span class="input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-										<input type="text"  name="modelyear" autocomplete="off"  class="form-control"/>
-									</div>
+								
 								</div>
 							</div>
+
+							
 
 							<div class="form-group">
 								<div class="my-form-group">
 									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Fuel Type')}} <label class="color-danger">*</label></label>
-									<div class="col-md-2 col-sm-2 col-xs-12">
-										<select class="form-control select_fueltype " name="fueltype" required >
-											<option value="">{{ trans('app.Select fuel type')}} </option>
-												@if(!empty($fuel_type))
-													@foreach($fuel_type as $fuel_types)
-														<option value="{{ $fuel_types->id }}">{{ $fuel_types->fuel_type }}</option>
-													@endforeach
-												@endif
-										</select> 
-									</div>									
-									<div class="col-md-2 col-sm-2 col-xs-12 addremove">
-										<button type="button" class="btn btn-default" data-target="#responsive-modal-fuel" data-toggle="modal">{{ trans('app.Add Or Remove')}}</button>
-									</div>
-								</div>
-
-								<div class="">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.No of Grear')}} <label class="text-danger"></label></label>
 									<div class="col-md-4 col-sm-4 col-xs-12">
-										<input type="text"  name="gearno"  value="{{ old('gearno') }}" placeholder="{{ trans('app.Enter No of Gear')}}" maxlength="5" class="form-control">
-									</div>
+										<input type="text"  name="fueltype" autocomplete="off" placeholder="FuelType"  class="form-control"/>
+									</div>									
 								</div>
 							</div>
 						  
-							<div class="form-group">
-								<div class="my-form-group">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Name')}} <label class="color-danger">*</label></label>
-									<div class="col-md-2 col-sm-2 col-xs-12">
-										<select class="form-control model_addname" name="modelname" required>
-											<option value="">{{ trans('app.Select Model Name')}}</option>
-										@if(!empty($model_name))
-											@foreach ($model_name as $model_names)
-											<option value="{{ $model_names->model_name }}">{{ $model_names->model_name }}</option>
-											@endforeach
-										@endif
-										</select>
-									</div>
-									<div class="col-md-2 col-sm-2 col-xs-12 addremove">
-										<button type="button" class="btn btn-default" data-target="#responsive-modal-vehi-model" data-toggle="modal">{{ trans('app.Add Or Remove')}}</button>
-									</div>
-								</div>
-
-								<div class="{{ $errors->has('price') ? ' has-error' : '' }} my-form-group">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">
-									{{ trans('app.Price' )}} (<?php echo getCurrencySymbols(); ?>) <label class="color-danger">*</label></label>
-									<div class="col-md-4 col-sm-4 col-xs-12">
-										<input type="text"  name="price"  value="{{ old('price') }}" placeholder="{{ trans('app.Enter Price')}}" class="form-control" maxlength="10" required>
-										<!-- @if ($errors->has('price'))
-										   <span class="help-block">
-											   <strong>{{ $errors->first('price') }}</strong>
-										   </span>
-										@endif -->
-									</div>
-								</div>
-							</div>
+							
 
 							<div class="form-group">
 								<div class="{{ $errors->has('odometerreading') ? ' has-error' : '' }}">
@@ -149,54 +98,14 @@
 									</div>
 								</div>
 
-								<div class="">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Date Of Manufacturing')}} <label class="text-danger"></label></label>
-									<div class="col-md-4 col-sm-4 col-xs-12 input-group date datepicker">
-										<span class="input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-										<input type="text"  name="dom" autocomplete="off" class="form-control" placeholder="<?php echo getDatepicker();?>" onkeypress="return false;" />
-									</div>
-								</div>
+							
 							</div>
 
-							<div class="form-group">
-								<div class="">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Gear Box')}} <label class="text-danger"></label></label>
-									<div class="col-md-4 col-sm-4 col-xs-12">
-										<input type="text"  name="gearbox"  value="{{ old('gearbox') }}" placeholder="{{ trans('app.Enter Grear Box')}}" maxlength="30" class="form-control">
-									</div>
-								</div>
-
-								<div class="">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Gear Box No')}}</label>
-									<div class="col-md-4 col-sm-4 col-xs-12">
-										<input type="text"  name="gearboxno"  value="{{ old('gearboxno') }}" placeholder="{{ trans('app.Enter Gearbox No')}}" maxlength="30" class="form-control" >
-									</div>
-								</div>
-							</div>
+							
+							
 							
 							<div class="form-group">
-								<div class="">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Engine No')}} <label class="text-danger"></label></label>
-									<div class="col-md-4 col-sm-4 col-xs-12">
-										<input type="text"  name="engineno"  value="{{ old('engineno') }}" placeholder="{{ trans('app.Enter Engine No')}}" maxlength="30" class="form-control">
-									</div>
-								</div>
-								
-								<div class="">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Engine Size')}} <label class="text-danger"></label></label>
-									<div class="col-md-4 col-sm-4 col-xs-12">
-										<input type="text"  name="enginesize"  value="{{ old('enginesize') }}" placeholder="{{ trans('app.Enter Engine Size')}}" maxlength="30" class="form-control">
-									</div>
-								</div>
-							</div>
 							
-							<div class="form-group">
-								<div class="">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Key No')}} <label class="text-danger"></label></label>
-									<div class="col-md-4 col-sm-4 col-xs-12">
-										<input type="text"  name="keyno"  value="{{ old('keyno') }}" placeholder="{{ trans('app.Enter Key No')}}" maxlength="30" class="form-control">
-									</div>
-								</div>
 								<div class="">
 									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Engine')}} <label class="text-danger"></label></label>
 									<div class="col-md-4 col-sm-4 col-xs-12">
