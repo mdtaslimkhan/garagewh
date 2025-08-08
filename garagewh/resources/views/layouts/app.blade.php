@@ -190,7 +190,7 @@
                 	@endcanany
 				
 					@canany(['vehicle_view','vehicletype_view','vehiclebrand_view','colors_view'])
-                	<li><a href="{!! url('/vehicle/list') !!}"><i class="fa fa-car"></i> {{ trans('app.Vehicles')}} <span class="fa fa-chevron-down"></span></a>
+                	<li><a href="{!! url('/vehicle/list') !!}"><i class="fa fa-car"></i> {{ trans('app.Vehicles')}}</span></a>
                 	</li>
                 	@endcanany
 
