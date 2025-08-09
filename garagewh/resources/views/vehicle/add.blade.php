@@ -237,6 +237,43 @@
 									</div>
 								</div>
 					</div>
+					<div class="col-md-6 col-sm-12 col-xs-12 form-group ">
+									<div class="col-md-6 col-sm-6 col-xs-6" style="padding-left:0px;">
+										<h2>{{ trans('app.Vehicle Color')}} </h2></span>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-6" style="padding-bottom: 33px;">
+										<button type="button" id="add_new_color" class="btn btn-default newadd" url="{!! url('vehicle/add/getcolor')!!}">{{ trans('app.Add New')}}
+										</button>
+									</div>
+									<div class="form-group col-md-12 col-sm-12 col-xs-12" style="padding-bottom:5px">
+										<table class="table table-bordered addtaxtype"  id="tab_color" align="center">
+											<thead>
+												<tr>
+													<th class="all">{{ trans('app.Colors')}}</th>
+													<th>{{ trans('app.Action')}}</th>
+												</tr>
+											</thead>			
+											<tbody>
+												<tr id="color_id_1">
+													<td>
+														<select name="color[]" class="form-control color" id="tax_1" data-id="1">
+															<option value="">{{ trans('app.Select Color')}}</option>
+															@if(!empty($color))
+																@foreach($color as $colors)
+																	<option value="{{ $colors->id }}">{{ $colors->color }}</option>
+																@endforeach
+															@endif
+														</select>
+													</td>
+													<td>
+														<span class="" data-id="1"><i class="fa fa-trash"></i> {{ trans('app.Delete')}}</span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
 					</form>`;
 
 					div.find('.details').html(" ");
