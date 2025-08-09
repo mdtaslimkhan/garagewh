@@ -31,6 +31,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_content">
+					<div class="row">
 										<div class="form-group" style="margin-top:20px;">
 											<div class="my-form-group">
 												<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Vehicle VIN')}} <label class="color-danger">*</label></label>
@@ -42,9 +43,24 @@
 												</div>
 												
 											</div>
+											</div>
 										</div>
-										<div class="vin-result">
-												<div class="details"></div>
+										<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<div class="vin-result">
+												<table class="table table-bordered">
+												<tr>
+													<th>Value</th>
+													<th>Value Id</th>
+													<th>Variable</th>
+													<th>Variable Id</th>
+												</tr>
+												<tbody class="details">
+												</tbody>
+
+												</table>
+											</div>
+										</div>
 										</div>
 						
 									</div>
@@ -96,7 +112,12 @@
 					console.log(data.Results);
 					
 					for (var i = 0; i < data.Results.length; i++) {
-                            op += "<span>data.Results[i].Variable</span><br/>";
+                            op += "<tr>";
+                            op += "<td>"+data.Results[i].Value+"</td>";
+                            op += "<td>"+data.Results[i].ValueId+"</td>";
+                            op += "<td>"+data.Results[i].Variable+"</td>";
+                            op += "<td>"+data.Results[i].VariableId+"</td>";
+                            op += "</tr>";
                     }
 
 					div.find('.details').html(" ");
