@@ -46,21 +46,12 @@
 											</div>
 										</div>
 										<div class="row">
-										<div class="col-md-6 col-sm-6 col-xs-12">
 											<div class="vin-result">
-												<table class="table table-bordered">
-												<tr>
-													<th>Value</th>
-													<th>Value Id</th>
-													<th>Variable</th>
-													<th>Variable Id</th>
-												</tr>
-												<tbody class="details">
-												</tbody>
+											
+												<div class="details">
+												</div>
 
-												</table>
 											</div>
-										</div>
 										</div>
 						
 									</div>
@@ -110,15 +101,143 @@
 				dataType: 'json',
 				success: function (data) {
 					console.log(data.Results);
+					var str = ["Make","Manufacturer Name", "Model", "Model Year", "Displacement (L)","Engine Model", "Trim", "Vehicle Descriptor","Fuel Type - Primary", "Series"];
+								op += `
+								<form id="vehicleAdd-Form" action="{{ url('/vehicle/store') }}" method="post" enctype="multipart/form-data"  class="form-horizontal upperform vehicleAddForm">
+									<input type="hidden" name="_token" value="{{csrf_token()}}">`;
+					for(var s = 0; s < str.length; s++){
 					
-					for (var i = 0; i < data.Results.length; i++) {
-                            op += "<tr>";
-                            op += "<td>"+data.Results[i].Value+"</td>";
-                            op += "<td>"+data.Results[i].ValueId+"</td>";
-                            op += "<td>"+data.Results[i].Variable+"</td>";
-                            op += "<td>"+data.Results[i].VariableId+"</td>";
-                            op += "</tr>";
-                    }
+						for (var i = 0; i < data.Results.length; i++) {
+							if(data.Results[i].Variable == str[s]){
+								if(str[s] == "Model Year"){
+								op += `
+								<form id="vehicleAdd-Form" action="{{ url('/vehicle/store') }}" method="post" enctype="multipart/form-data"  class="form-horizontal upperform vehicleAddForm">
+									<input type="hidden" name="_token" value="{{csrf_token()}}">
+								<div class="form-group">
+								<div class="my-form-group">
+										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Model Years')}} <label class="color-danger"></label></label>
+										<div class="col-md-4 col-sm-4 col-xs-12 input-group">
+											<input type="text"  name="modelyear" autocomplete="off" value="${data.Results[i].Value}"  class="form-control"/>
+										</div>								
+									</div>
+								</div>`;
+								}else if(str[s] == "Make"){
+									op += `<div class="form-group">
+										<div class="my-form-group">
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Vehicle Brand')}} <label class="color-danger">*</label></label>
+											<div class="col-md-4 col-sm-4 col-xs-12">
+												<input type="text"  name="vehicabrand" autocomplete="off" placeholder="Brand" value="${data.Results[i].Value}"  class="form-control"/>
+											</div>
+										</div>
+									</div>`;
+								}else if(str[s] == "Model"){
+									op += `<div class="form-group">
+										<div class="my-form-group">
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Name')}} <label class="color-danger">*</label></label>
+											<div class="col-md-4 col-sm-4 col-xs-12">
+												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+											</div>
+										</div>
+									</div>`;
+								}else if(str[s] == "Manufacturer Name"){
+									op += `<div class="form-group">
+										<div class="my-form-group">
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Origin')}} <label class="color-danger">*</label></label>
+											<div class="col-md-4 col-sm-4 col-xs-12">
+												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+											</div>
+										</div>
+									</div>`;
+								}else if(str[s] == "Displacement (L)"){
+									op += `<div class="form-group">
+										<div class="my-form-group">
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Engine Size')}} <label class="color-danger">*</label></label>
+											<div class="col-md-4 col-sm-4 col-xs-12">
+												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+											</div>
+										</div>
+									</div>`;
+								}else if(str[s] == "Engine Model"){
+									op += `<div class="form-group">
+										<div class="my-form-group">
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Engine')}} <label class="color-danger">*</label></label>
+											<div class="col-md-4 col-sm-4 col-xs-12">
+												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+											</div>
+										</div>
+									</div>`;
+								}else if(str[s] == "Trim"){
+									op += `<div class="form-group">
+										<div class="my-form-group">
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Trim')}} <label class="color-danger">*</label></label>
+											<div class="col-md-4 col-sm-4 col-xs-12">
+												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+											</div>
+										</div>
+									</div>`;
+								}else if(str[s] == "Vehicle Descriptor"){
+									op += `<div class="form-group">
+										<div class="my-form-group">
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model WMI/VDS/VIS')}} <label class="color-danger">*</label></label>
+											<div class="col-md-4 col-sm-4 col-xs-12">
+												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+											</div>
+										</div>
+									</div>`;
+								}else if(str[s] == "Fuel Type - Primary"){
+									op += `<div class="form-group">
+										<div class="my-form-group">
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Fuel Type')}} <label class="color-danger">*</label></label>
+											<div class="col-md-4 col-sm-4 col-xs-12">
+												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+											</div>
+										</div>
+									</div>`;
+								}else if(str[s] == "Series"){
+									op += `<div class="form-group">
+										<div class="my-form-group">
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Series')}} <label class="color-danger">*</label></label>
+											<div class="col-md-4 col-sm-4 col-xs-12">
+												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+											</div>
+										</div>
+									</div>
+									
+									`;
+								}
+
+									/* op += "<p><span>"+data.Results[i].Value+"</span> - ";
+									op += "<span>"+data.Results[i].Variable+"</span></p>"; */
+								}
+							}
+					}
+
+					op += `
+					<div class="form-group">
+								<div class="">
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Number Plate')}} <label class="text-danger"></label></label>
+									<div class="col-md-4 col-sm-4 col-xs-12">
+										<input type="text"  name="number_plate"  value="{{ old('number_plate') }}" placeholder="{{ trans('app.Enter Number Plate')}}" maxlength="30" class="form-control">
+									</div>
+								</div>
+					</div>
+					<div class="form-group">
+								<div class="">
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Odometer Reading')}} <label class="text-danger"></label></label>
+									<div class="col-md-4 col-sm-4 col-xs-12">
+										<input type="text"  name="odometerreading"  value="{{ old('number_plate') }}" placeholder="{{ trans('app.Enter Odometer Reading')}}" maxlength="30" class="form-control">
+									</div>
+								</div>
+					</div>
+					<div class="form-group">
+								<div class="">
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Odometer Transaxle')}} <label class="text-danger"></label></label>
+									<div class="col-md-4 col-sm-4 col-xs-12">
+										<input type="text"  name="odometerreading"  value="{{ old('number_plate') }}" placeholder="{{ trans('app.Enter Transaxle')}}" maxlength="30" class="form-control">
+									</div>
+								</div>
+					</div>
+					</form>`;
 
 					div.find('.details').html(" ");
 					div.find('.details').append(op);
