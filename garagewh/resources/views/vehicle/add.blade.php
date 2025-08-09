@@ -36,7 +36,7 @@
 											<div class="my-form-group">
 												<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Vehicle VIN')}} <label class="color-danger">*</label></label>
 												<div class="col-md-4 col-sm-4 col-xs-12">
-													<input type="text"  name="VIN" autocomplete="off" placeholder="VIN" value="5NMS33AD6KH035437"  class="form-control vinnumber"/>
+													<input type="text"  name="VIN" autocomplete="off" placeholder="VIN" value=""  class="form-control vinnumber"/>
 												</div>
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<button class="btn btn-primary searchvin" >Search</button>
@@ -142,7 +142,7 @@
 								}else if(str[s] == "Manufacturer Name"){
 									op += `<div class="form-group">
 										<div class="my-form-group">
-											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Origin')}} <label class="color-danger">*</label></label>
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Manufacturer')}} <label class="color-danger">*</label></label>
 											<div class="col-md-4 col-sm-4 col-xs-12">
 												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
 											</div>
