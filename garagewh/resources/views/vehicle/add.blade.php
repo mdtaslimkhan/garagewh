@@ -231,7 +231,7 @@
 					</div>
 					<div class="form-group">
 								<div class="">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Odometer Transaxle')}} <label class="text-danger"></label></label>
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Transaxle')}} <label class="text-danger"></label></label>
 									<div class="col-md-4 col-sm-4 col-xs-12">
 										<input type="text"  name="odometerreading"  value="{{ old('number_plate') }}" placeholder="{{ trans('app.Enter Transaxle')}}" maxlength="30" class="form-control">
 									</div>
