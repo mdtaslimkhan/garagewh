@@ -23,7 +23,7 @@
     <!-- Custom Theme Style -->
     <link href="{{ URL::asset('build/css/custom.min.css') }} " rel="stylesheet">
 	 <!-- Own Theme Style -->
-    <link href="{{ URL::asset('own.css') }} " rel="stylesheet">
+    <link href="{{ URL::asset('build/css/own.css') }} " rel="stylesheet">
 	<!-- sweetalert -->
 	<link href="{{ URL::asset('vendors/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">
 	 <!-- Custom Theme Scripts -->

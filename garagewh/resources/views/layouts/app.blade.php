@@ -40,7 +40,7 @@
     <link href="{{ URL::asset('build/css/custom.min.css') }} " rel="stylesheet">
 	
 	 <!-- Own Theme Style -->
-    <link href="{{ URL::asset('own.css') }} " rel="stylesheet">
+    <link href="{{ URL::asset('build/css/own.css') }} " rel="stylesheet">
 	
 
 	<!-- Our Custom stylesheet -->
