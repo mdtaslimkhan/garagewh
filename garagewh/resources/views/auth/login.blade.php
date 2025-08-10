@@ -32,7 +32,7 @@
 	<script src="{{ URL::asset('vendors/sweetalert/sweetalert.min.js')}}"></script>
 <style>
 .login_form{
-  background: #0b7cec;
+  background: #40a0ff;
   border-radius: 10px;
   padding: 0 10px;
 }	
