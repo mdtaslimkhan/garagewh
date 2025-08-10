@@ -212,43 +212,43 @@ class VehicalControler extends Controller
 	// Vehical save
 	public function vehicalstore(Request $request)
 	{
-		/*$this->validate($request, [  
-         	'price' => 'numeric',
-	    ]);*/
+	//	return $request->all();
 
-		/*$vehical_type=Input::get('vehical_id');
-		$chasicno=Input::get('chasicno');
-		$vehicabrand=Input::get('vehicabrand');
-		$modelyear=Input::get('modelyear');
-		$fueltype=Input::get('fueltype');
-		$modelname=Input::get('modelname');
-		$price=Input::get('price');
-		$odometerreading=Input::get('odometerreading');
-		$gearbox=Input::get('gearbox');
-		$gearboxno=Input::get('gearboxno');
-		$engineno=Input::get('engineno');
-		$enginesize=Input::get('enginesize');
-		$keyno=Input::get('keyno');
-		$engine=Input::get('engine');
-		$nogears=Input::get('gearno');
-		$numberPlate = Input::get('number_plate');*/
+		// "vin": "5NMS33AD6KH035437",
+		// "vehical_id": "fsadfasdf",
+		// "vehicabrand": "HYUNDAI",
+		// "modelyear": "2019",
+		// "fueltype": "Gasoline",
+		// "modelname": "Santa Fe",
+		// "odometerreading": "asdfa",
+		// "engineno": "GDI THETA II",
+		// "enginesize": "2.4L",
+		// "number_plate": "asdfa",
+		// "color": [null],
+		// "description": [null]
 
-		$vehical_type = $request->vehical_id;
-		$chasicno = $request->chasicno;
-		$vehicabrand = $request->vehicabrand;
-		$modelyear = $request->modelyear;
-		$fueltype = $request->fueltype;
-		$modelname = $request->modelname;
-		$price = $request->price;
-		$odometerreading = $request->odometerreading;
-		$gearbox = $request->gearbox;
-		$gearboxno = $request->gearboxno;
-		$engineno = $request->engineno;
-		$enginesize = $request->enginesize;
-		$keyno = $request->keyno;
-		$engine = $request->engine;
-		$nogears = $request->gearno;
-		$numberPlate = $request->number_plate;
+		// "company": "HYUNDAI MOTOR MANUFACTURING ALABAMA LLC (HMMA)",
+		// "trim": "SEL, SEL Plus",
+		// "descriptor": "5NMS33AD*KH",
+		// "series": "null",
+		// "transaxle": "asdfa",
+
+		$vehical_type = $request->vehical_id; // added
+		$vehicabrand = $request->vehicabrand; // added
+		$modelyear = $request->modelyear; // added
+		$fueltype = $request->fueltype; // added
+		$modelname = $request->modelname; // added
+		$odometerreading = $request->odometerreading; // added
+		$engineno = $request->engineno; // added
+		$enginesize = $request->enginesize; // added
+		$numberPlate = $request->number_plate; // added
+		// $chasicno = $request->chasicno;
+		// $gearbox = $request->gearbox;
+		// $gearboxno = $request->gearboxno;
+		// $price = $request->price;
+		// $keyno = $request->keyno; 
+		// $engine = $request->engine;
+		// $nogears = $request->gearno;
 
 		$doms = $request->dom;
 
@@ -267,25 +267,33 @@ class VehicalControler extends Controller
 		{
 			$dom = null;
 		}	
+
+		// $chasicno = $request->chasicno;
+		// $gearbox = $request->gearbox;
+		// $gearboxno = $request->gearboxno;
+		// $price = $request->price;
+		// $keyno = $request->keyno; 
+		// $engine = $request->engine;
+		// $nogears = $request->gearno;
      
 		$vehical = new Vehicle;
 		$vehical->vehicletype_id = $vehical_type;
-		$vehical->chassisno = $chasicno;
 		$vehical->vehiclebrand_id = $vehicabrand;
 		$vehical->modelyear = $modelyear;
 		$vehical->fuel_id = $fueltype;
 		$vehical->modelname = $modelname;
-		$vehical->price = $price;
 		$vehical->odometerreading = $odometerreading;
 		$vehical->dom  = $dom;
-		$vehical->gearbox = $gearbox;
-		$vehical->gearboxno = $gearboxno;
 		$vehical->engineno = $engineno;
-		$vehical->enginesize = $enginesize ;
-		$vehical->keyno  = $keyno;
-		$vehical->engine = $engine;
-		$vehical->nogears = $nogears;
+		$vehical->enginesize = $enginesize;
 		$vehical->number_plate = $numberPlate;
+		// $vehical->nogears = $nogears;
+		// $vehical->engine = $engine;
+		// $vehical->keyno  = $keyno;
+		// $vehical->price = $price;
+		// $vehical->gearboxno = $gearboxno;
+		// $vehical->gearbox = $gearbox;
+		// $vehical->chassisno = $chasicno;
 
 		//custom field save	
 		//$custom=Input::get('custom');

@@ -50,11 +50,11 @@
 									<th>#</th>
 									<th>{{ trans('app.Image')}}</th>
 									<th>{{ trans('app.Model Name') }}</th>
-									<th>{{ trans('app.Type') }}</th>
-									<th>{{  trans('app.Price')}}  (<?php echo getCurrencySymbols(); ?>)</th>
-									<th>{{  trans('app.Date Of Manufacturing')}}</th>
+									<th>{{ trans('app.Model Year') }}</th>
+									<th>{{ trans('app.Brand')}}</th>
+									<th>{{ trans('app.Fuel Type')}}</th>
 									<th>{{ trans('app.Engine No')}}</th>
-									<th>{{ trans('app.Number Plate')}}</th>
+									<th>{{ trans('app.Engin Size')}}</th>
 									<th>{{ trans('app.Action')}}</th>
 								</tr>
 							</thead>
@@ -67,17 +67,11 @@
 										<?php  $vehicleimage = getVehicleImage($vehicals->id); ?>
 									<td><img src="{{ URL::asset('vehicle/'.$vehicleimage) }}"  width="50px" height="50px" class="img-circle" ></td>
 									<td>{{ $vehicals->modelname }}</td>
-									<td>{{ getVehicleType($vehicals->vehicletype_id) }}</td>
-									<td>{{ $vehicals->price }}</td>
-									<td>
-										@if(!empty($vehicals->dom))
-											{{ date(getDateFormat(),strtotime($vehicals->dom)) }}
-										@else
-											{{ trans('app.Not Added') }}
-										@endif										
-									</td>
+									<td>{{ $vehicals->modelyear }}</td>
+									<td>{{ $vehicals->vehiclebrand_id }}</td>
+									<td>{{ $vehicals->fuel_id }}</td>
 									<td>{{ $vehicals->engineno??trans('app.Not Added') }}</td>
-									<td>{{ $vehicals->number_plate??trans('app.Not Added') }}</td>
+									<td>{{ $vehicals->enginesize??trans('app.Not Added') }}</td>
 									<td> 
 									
 										@can('vehicle_view')
@@ -85,7 +79,7 @@
 										@endcan
 
 										@can('vehicle_edit')
-											<a href="{!! url ('/vehicle/list/edit/'.$vehicals->id) !!}"> <button type="button" class="btn btn-round btn-success">{{ trans('app.Edit')}}</button></a>
+											<!-- <a href="{!! url ('/vehicle/list/edit/'.$vehicals->id) !!}"> <button type="button" class="btn btn-round btn-success">{{ trans('app.Edit')}}</button></a> -->
 										@endcan
 										
 										@can('vehicle_delete')

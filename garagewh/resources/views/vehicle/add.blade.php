@@ -6,6 +6,7 @@
 
 <!-- page content -->
 	<div class="right_col" role="main">
+	   <div class="loader"></div>
 		<div class="page-title">
 			<div class="nav_menu">
 				<nav>
@@ -36,7 +37,7 @@
 											<div class="my-form-group">
 												<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Vehicle VIN')}} <label class="color-danger">*</label></label>
 												<div class="col-md-4 col-sm-4 col-xs-12">
-													<input type="text"  name="VIN" autocomplete="off" placeholder="VIN" value=""  class="form-control vinnumber"/>
+													<input type="text"  name="VIN" autocomplete="off" placeholder="VIN" value="5NMS33AD6KH035437"  class="form-control vinnumber"/>
 												</div>
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<button class="btn btn-primary searchvin" >Search</button>
@@ -45,13 +46,172 @@
 											</div>
 											</div>
 										</div>
-										<div class="row">
+										<div class="row search-result">
+										<form id="vehicleAdd-Form" action="{{ url('/vehicle/store') }}" method="post" enctype="multipart/form-data"  class="form-horizontal upperform vehicleAddForm">
+											<input type="hidden" name="_token" value="{{csrf_token()}}">
 											<div class="vin-result">
+												
 											
 												<div class="details">
 												</div>
 
-											</div>
+												<!--vehicle color-->
+													<div class="col-md-6 col-sm-12 col-xs-12 form-group ">
+														<div class="col-md-6 col-sm-6 col-xs-6" style="padding-left:0px;">
+															<h2>{{ trans('app.Vehicle Color')}} </h2></span>
+														</div>
+														<div class="col-md-6 col-sm-6 col-xs-6" style="padding-bottom: 33px;">
+															<button type="button" id="add_new_color" class="btn btn-default newadd" url="{!! url('vehicle/add/getcolor')!!}">{{ trans('app.Add New')}}
+															</button>
+														</div>
+														<div class="form-group col-md-12 col-sm-12 col-xs-12" style="padding-bottom:5px">
+															<table class="table table-bordered addtaxtype"  id="tab_color" align="center">
+																<thead>
+																	<tr>
+																		<th class="all">{{ trans('app.Colors')}}</th>
+																		<th>{{ trans('app.Action')}}</th>
+																	</tr>
+																</thead>			
+																<tbody>
+																	<tr id="color_id_1">
+																		<td>
+																			<select name="color[]" class="form-control color" id="tax_1" data-id="1">
+																				<option value="">{{ trans('app.Select Color')}}</option>
+																				@if(!empty($color))
+																					@foreach($color as $colors)
+																						<option value="{{ $colors->id }}">{{ $colors->color }}</option>
+																					@endforeach
+																				@endif
+																			</select>
+																		</td>
+																		<td>
+																			<span class="" data-id="1"><i class="fa fa-trash"></i> {{ trans('app.Delete')}}</span>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+										
+												<!-- Vehicle Description  -->
+														<div class="col-md-6 col-sm-12 col-xs-12 form-group">
+															<div class="col-md-6 col-sm-6 col-xs-6">
+																<h2>{{ trans('app.Vehicle Description')}} </h2>
+															</div>
+															<div class="col-md-6 col-sm-6 col-xs-6" style="padding-bottom: 33px;">
+																<button type="button" id="add_new_description" class="btn btn-default newadd" url="{!! url('vehicle/add/getDescription')!!}">{{ trans('app.Add New')}}
+																</button>
+															</div>		
+															<div class="form-group col-md-12 col-sm-12 col-xs-12">
+																<table class="table table-bordered addtaxtype"  id="tab_decription_detail" align="center">
+																	<thead>
+																		<tr>
+																			<th class="all">{{ trans('app.Description')}}</th>
+																			<th class="all">{{ trans('app.Action')}}</th>
+																		</tr>
+																	</thead>			
+																	<tbody>
+																		<tr id="row_id_1">
+																			<td>
+																				<textarea name="description[]" class="form-control" maxlength="100" id="tax_1" ></textarea> 
+																			</td>
+																			<td>
+																				<span class="" data-id="1"><i class="fa fa-trash"></i> {{ trans('app.Delete')}}</span>
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+												</div>
+
+												<!-- Start Custom Field, (If register in Custom Field Module)  -->
+													@if(!empty($tbl_custom_fields))
+														<div class="col-md-12 col-xs-12 col-sm-12 space">
+															<h4><b>{{ trans('app.Custom Fields')}}</b></h4>
+															<p class="col-md-12 col-xs-12 col-sm-12 ln_solid"></p>
+														</div>
+														<?php
+															$subDivCount = 0;
+														?>
+														@foreach($tbl_custom_fields as $myCounts => $tbl_custom_field)
+															<?php 
+																if($tbl_custom_field->required == 'yes')
+																{
+																	$required="required";
+																	$red="*";
+																}else{
+																	$required="";
+																	$red="";
+																}
+
+																$subDivCount++;
+															?>
+															
+															@if($myCounts%2 == 0)
+																<div class="col-md-12 col-sm-6 col-xs-12">
+															@endif
+
+															<div class="form-group col-md-6 col-sm-6 col-xs-12">
+																<label class="control-label col-md-4 col-sm-4 col-xs-12" for="account-no">{{$tbl_custom_field->label}} <label class="text-danger">{{$red}}</label></label>
+																<div class="col-md-8 col-sm-8 col-xs-12">
+																@if($tbl_custom_field->type == 'textarea')
+																	<textarea  name="custom[{{$tbl_custom_field->id}}]" class="form-control" placeholder="{{ trans('app.Enter')}} {{$tbl_custom_field->label}}" maxlength="100" {{$required}}></textarea>
+																@elseif($tbl_custom_field->type == 'radio')
+																	
+																	<?php
+																		$radioLabelArrayList = getRadiolabelsList($tbl_custom_field->id)
+																	?>
+																	@if(!empty($radioLabelArrayList))
+																	<div style="margin-top: 5px;">
+																		@foreach($radioLabelArrayList as $k => $val)
+																			<input type="{{$tbl_custom_field->type}}"  name="custom[{{$tbl_custom_field->id}}]" value="{{$k}}" <?php if($k == 0) {echo "checked"; } ?> >{{ $val }} &nbsp;
+																		@endforeach
+																	</div>
+																	@endif
+																@elseif($tbl_custom_field->type == 'checkbox')
+																	
+																	<?php
+																		$checkboxLabelArrayList = getCheckboxLabelsList($tbl_custom_field->id);
+																		$cnt = 0;
+																	?>
+
+																	@if(!empty($checkboxLabelArrayList))
+																		<div style="margin-top: 5px;">
+																		@foreach($checkboxLabelArrayList as $k => $val)
+																			<input type="{{$tbl_custom_field->type}}" name="custom[{{$tbl_custom_field->id}}][]" value="{{$val}}"> {{ $val }} &nbsp;
+																		<?php $cnt++; ?>
+																		@endforeach
+																	</div>
+																		<input type="hidden" name="checkboxCount" value="{{$cnt}}">
+																	@endif											
+																@elseif($tbl_custom_field->type == 'textbox' || $tbl_custom_field->type == 'date')
+																	<input type="{{$tbl_custom_field->type}}"  name="custom[{{$tbl_custom_field->id}}]"  class="form-control" placeholder="{{ trans('app.Enter')}} {{$tbl_custom_field->label}}" maxlength="30" {{ $required }}>
+																@endif
+																</div>
+															</div>
+															@if($myCounts%2 != 0)
+																</div>
+															@endif
+														@endforeach	
+														<?php 
+															if ($subDivCount%2 != 0) {
+																echo "</div>";
+															}
+														?>				
+													@endif
+												<!-- End Custom Field -->
+												<div class="form-group col-md-12 col-sm-12 col-xs-12">
+													<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+														<a class="btn btn-primary" href="{{ URL::previous() }}">{{ trans('app.Cancel')}}</a>
+														<button type="submit" class="btn btn-success vehicleAddSubmitButton">{{ trans('app.Submit')}}</button>
+													</div>
+												</div>
+												
+												</div>
+											</form>
 										</div>
 						
 									</div>
@@ -87,9 +247,11 @@
     $(document).ready(function(){
 
 		$(".searchvin").on('click',function(){
+			var loaderdiv = $('.loader').css('display', 'block');
 			var vin = $('.vinnumber').val();
 			console.log("vin "+ vin);
 			var div = $('.vin-result');
+			var result = $('.search-result');
 			var op = "";
 			$.ajax({
 				type: 'get',
@@ -103,19 +265,18 @@
 					console.log(data.Results);
 					var str = ["Make","Manufacturer Name", "Model", "Model Year", "Displacement (L)","Engine Model", "Trim", "Vehicle Descriptor","Fuel Type - Primary", "Series"];
 								op += `
-								<form id="vehicleAdd-Form" action="{{ url('/vehicle/store') }}" method="post" enctype="multipart/form-data"  class="form-horizontal upperform vehicleAddForm">
-									<input type="hidden" name="_token" value="{{csrf_token()}}">`;
+								<input type="hidden" name="vin" value="${vin}">
+								`;
 					for(var s = 0; s < str.length; s++){
 					
 						for (var i = 0; i < data.Results.length; i++) {
 							if(data.Results[i].Variable == str[s]){
 								if(str[s] == "Model Year"){
 								op += `
-								<form id="vehicleAdd-Form" action="{{ url('/vehicle/store') }}" method="post" enctype="multipart/form-data"  class="form-horizontal upperform vehicleAddForm">
-									<input type="hidden" name="_token" value="{{csrf_token()}}">
 								<div class="form-group">
 								<div class="my-form-group">
-										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Model Years')}} <label class="color-danger"></label></label>
+										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Model Years')}} 
+										<label class="color-danger"></label></label>
 										<div class="col-md-4 col-sm-4 col-xs-12 input-group">
 											<input type="text"  name="modelyear" autocomplete="off" value="${data.Results[i].Value}"  class="form-control"/>
 										</div>								
@@ -124,7 +285,8 @@
 								}else if(str[s] == "Make"){
 									op += `<div class="form-group">
 										<div class="my-form-group">
-											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Vehicle Brand')}} <label class="color-danger">*</label></label>
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Vehicle Brand')}} 
+											<label class="color-danger">*</label></label>
 											<div class="col-md-4 col-sm-4 col-xs-12">
 												<input type="text"  name="vehicabrand" autocomplete="off" placeholder="Brand" value="${data.Results[i].Value}"  class="form-control"/>
 											</div>
@@ -133,7 +295,8 @@
 								}else if(str[s] == "Model"){
 									op += `<div class="form-group">
 										<div class="my-form-group">
-											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Name')}} <label class="color-danger">*</label></label>
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Name')}} 
+											<label class="color-danger">*</label></label>
 											<div class="col-md-4 col-sm-4 col-xs-12">
 												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
 											</div>
@@ -142,67 +305,74 @@
 								}else if(str[s] == "Manufacturer Name"){
 									op += `<div class="form-group">
 										<div class="my-form-group">
-											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Manufacturer')}} <label class="color-danger">*</label></label>
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Manufacturer')}} 
+											<label class="color-danger">*</label></label>
 											<div class="col-md-4 col-sm-4 col-xs-12">
-												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+												<input type="text"  name="company" autocomplete="off" placeholder="company" value="${data.Results[i].Value}"  class="form-control"/>
 											</div>
 										</div>
 									</div>`;
 								}else if(str[s] == "Displacement (L)"){
 									op += `<div class="form-group">
 										<div class="my-form-group">
-											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Engine Size')}} <label class="color-danger">*</label></label>
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Engine Size')}} 
+											<label class="color-danger">*</label></label>
 											<div class="col-md-4 col-sm-4 col-xs-12">
-												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+												<input type="text"  name="enginesize" autocomplete="off" placeholder="enginesize" value="${data.Results[i].Value}L"  class="form-control"/>
 											</div>
 										</div>
 									</div>`;
 								}else if(str[s] == "Engine Model"){
 									op += `<div class="form-group">
 										<div class="my-form-group">
-											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Engine')}} <label class="color-danger">*</label></label>
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Engine')}} 
+											<label class="color-danger">*</label></label>
 											<div class="col-md-4 col-sm-4 col-xs-12">
-												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+												<input type="text"  name="engineno" autocomplete="off" placeholder="engineno" value="${data.Results[i].Value}"  class="form-control"/>
 											</div>
 										</div>
 									</div>`;
 								}else if(str[s] == "Trim"){
 									op += `<div class="form-group">
 										<div class="my-form-group">
-											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Trim')}} <label class="color-danger">*</label></label>
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Trim')}} 
+											<label class="color-danger">*</label></label>
 											<div class="col-md-4 col-sm-4 col-xs-12">
-												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+												<input type="text"  name="trim" autocomplete="off" placeholder="trim" value="${data.Results[i].Value}"  class="form-control"/>
 											</div>
 										</div>
 									</div>`;
 								}else if(str[s] == "Vehicle Descriptor"){
 									op += `<div class="form-group">
 										<div class="my-form-group">
-											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model WMI/VDS/VIS')}} <label class="color-danger">*</label></label>
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model WMI/VDS/VIS')}} 
+											<label class="color-danger">*</label></label>
 											<div class="col-md-4 col-sm-4 col-xs-12">
-												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+												<input type="text"  name="descriptor" autocomplete="off" placeholder="descriptor" value="${data.Results[i].Value}"  class="form-control"/>
 											</div>
 										</div>
 									</div>`;
 								}else if(str[s] == "Fuel Type - Primary"){
 									op += `<div class="form-group">
 										<div class="my-form-group">
-											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Fuel Type')}} <label class="color-danger">*</label></label>
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Model Fuel Type')}} 
+											<label class="color-danger">*</label></label>
 											<div class="col-md-4 col-sm-4 col-xs-12">
-												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+												<input type="text"  name="fueltype" autocomplete="off" placeholder="fueltype" value="${data.Results[i].Value}"  class="form-control"/>
 											</div>
 										</div>
 									</div>`;
 								}else if(str[s] == "Series"){
 									op += `<div class="form-group">
 										<div class="my-form-group">
-											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Series')}} <label class="color-danger">*</label></label>
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">{{ trans('app.Series')}} 
+											<label class="color-danger">*</label></label>
 											<div class="col-md-4 col-sm-4 col-xs-12">
-												<input type="text"  name="modelname" autocomplete="off" placeholder="modelname" value="${data.Results[i].Value}"  class="form-control"/>
+												<input type="text"  name="series" autocomplete="off" placeholder="series" value="${data.Results[i].Value}"  class="form-control"/>
 											</div>
 										</div>
 									</div>
-									
+								
 									`;
 								}
 
@@ -215,69 +385,49 @@
 					op += `
 					<div class="form-group">
 								<div class="">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Number Plate')}} <label class="text-danger"></label></label>
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Number Plate')}} 
+									<label class="text-danger"></label></label>
 									<div class="col-md-4 col-sm-4 col-xs-12">
-										<input type="text"  name="number_plate"  value="{{ old('number_plate') }}" placeholder="{{ trans('app.Enter Number Plate')}}" maxlength="30" class="form-control">
+										<input type="text"  name="number_plate" placeholder="number_plate" maxlength="30" class="form-control">
 									</div>
 								</div>
 					</div>
 					<div class="form-group">
 								<div class="">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Odometer Reading')}} <label class="text-danger"></label></label>
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Vehicle Type')}} 
+									<label class="text-danger"></label></label>
 									<div class="col-md-4 col-sm-4 col-xs-12">
-										<input type="text"  name="odometerreading"  value="{{ old('number_plate') }}" placeholder="{{ trans('app.Enter Odometer Reading')}}" maxlength="30" class="form-control">
+										<input type="text"  name="vehical_id" placeholder="vehical_id" maxlength="30" class="form-control">
 									</div>
 								</div>
 					</div>
 					<div class="form-group">
 								<div class="">
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Transaxle')}} <label class="text-danger"></label></label>
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Odometer Reading')}} 
+									<label class="text-danger"></label></label>
 									<div class="col-md-4 col-sm-4 col-xs-12">
-										<input type="text"  name="odometerreading"  value="{{ old('number_plate') }}" placeholder="{{ trans('app.Enter Transaxle')}}" maxlength="30" class="form-control">
+										<input type="text"  name="odometerreading" placeholder="odometerreading" maxlength="30" class="form-control">
 									</div>
 								</div>
 					</div>
-					<div class="col-md-6 col-sm-12 col-xs-12 form-group ">
-									<div class="col-md-6 col-sm-6 col-xs-6" style="padding-left:0px;">
-										<h2>{{ trans('app.Vehicle Color')}} </h2></span>
-									</div>
-									<div class="col-md-6 col-sm-6 col-xs-6" style="padding-bottom: 33px;">
-										<button type="button" id="add_new_color" class="btn btn-default newadd" url="{!! url('vehicle/add/getcolor')!!}">{{ trans('app.Add New')}}
-										</button>
-									</div>
-									<div class="form-group col-md-12 col-sm-12 col-xs-12" style="padding-bottom:5px">
-										<table class="table table-bordered addtaxtype"  id="tab_color" align="center">
-											<thead>
-												<tr>
-													<th class="all">{{ trans('app.Colors')}}</th>
-													<th>{{ trans('app.Action')}}</th>
-												</tr>
-											</thead>			
-											<tbody>
-												<tr id="color_id_1">
-													<td>
-														<select name="color[]" class="form-control color" id="tax_1" data-id="1">
-															<option value="">{{ trans('app.Select Color')}}</option>
-															@if(!empty($color))
-																@foreach($color as $colors)
-																	<option value="{{ $colors->id }}">{{ $colors->color }}</option>
-																@endforeach
-															@endif
-														</select>
-													</td>
-													<td>
-														<span class="" data-id="1"><i class="fa fa-trash"></i> {{ trans('app.Delete')}}</span>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+					<div class="form-group">
+								<div class="">
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">{{ trans('app.Transaxle')}} 
+									<label class="text-danger"></label></label>
+									<div class="col-md-4 col-sm-4 col-xs-12">
+										<input type="text"  name="transaxle" placeholder="transaxle" maxlength="30" class="form-control">
 									</div>
 								</div>
-							</div>
-					</form>`;
+					</div>
+					
+								
+					`;
 
 					div.find('.details').html(" ");
 					div.find('.details').append(op);
+		
+					$('.loader').css('display','none');
+					result.css('display','block');
 				},
 				error: function () {
 
@@ -350,6 +500,7 @@
 
 				   		//Form submit at a time only one for vehicleTypeAdd
 				   		$(".vehicaltypeadd").prop('disabled', false);
+						
 						return false;
 			   		},
 		 		});

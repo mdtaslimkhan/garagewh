@@ -76,14 +76,35 @@
 	
 	<!-- <link href="{!! URL::asset('build/dist/css/select2.min.css'); !!}" rel='stylesheet' type='text/css'> -->
 	<style>
+		.loader{
+			    position: fixed;
+				left: 0;
+				right: 0;
+				top: 0;
+				border: 0;
+				background: #000000c9;
+				z-index: 999;
+				width: 100%;
+				height: 100%;
+				display: none;
+				background-image: url('{{url("/")}}/loader.gif');
+				background-repeat: no-repeat;
+				background-position: center center;
+				background-size: 60px 60px;
+		}
+
+		.search-result{
+			display: none;
+		}
+
 	@media print
-   {
-     
-      .noprint
-      {
-        display:none
-      }
-   }
+		{
+			
+			.noprint
+			{
+				display:none
+			}
+		}
 	</style>
   </head>
 
