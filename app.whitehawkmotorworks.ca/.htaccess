@@ -20,6 +20,7 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
+
 <Files "Thumbs.db">
     Order Deny,Allow
     Deny from all
