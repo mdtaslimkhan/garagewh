@@ -31,13 +31,20 @@
     <script src="{{ URL::asset('build/js/custom.min.js') }}" defer="defer"></script>
 	<script src="{{ URL::asset('vendors/sweetalert/sweetalert.min.js')}}"></script>
 <style>
-.login_form{background: #2A3F54;}	
+.login_form{
+  background: #0b7cec;
+  border-radius: 10px;
+  padding: 0 10px;
+}	
 .login_content a:hover {
     text-decoration: none;
     color: #fff;
 }
 .login_content{text-shadow: none;}
 .help-block{text-align: left;}
+
+
+
 </style>
   </head>
   

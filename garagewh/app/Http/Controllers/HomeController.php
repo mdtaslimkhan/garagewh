@@ -455,7 +455,7 @@ class homecontroller extends Controller
 							$headers = "Content-type: text/html; charset=iso-8859-1\r\n";
 							$headers .= 'From:'. $mail_send_from . "\r\n";
 								
-							$data = mail($email,$mail_sub,$email_content,$headers);
+						//	$data = mail($email,$mail_sub,$email_content,$headers);
 						}
 					}
 				}
@@ -558,7 +558,7 @@ class homecontroller extends Controller
 						$headers = "Content-type: text/html; charset=iso-8859-1\r\n";
 						$headers .= 'From:'. $mail_send_from . "\r\n";
 							
-						$data = mail($email,$mail_sub,$email_content,$headers);
+					//	$data = mail($email,$mail_sub,$email_content,$headers);
 					}
 				}
 				
@@ -610,7 +610,7 @@ class homecontroller extends Controller
 									$headers = "Content-type: text/html; charset=iso-8859-1\r\n";
 									$headers .= 'From:'. $mail_send_from . "\r\n";
 										
-									$data = mail($email1,$mail_sub,$email_content,$headers);
+								//	$data = mail($email1,$mail_sub,$email_content,$headers);
 								}
 							}
 							$custo=DB::table('users')->where([['id','=',$customer_id],['role','=','Customer']])->first();	
