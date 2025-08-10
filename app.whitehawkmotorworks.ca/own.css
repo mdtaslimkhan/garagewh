@@ -10,6 +10,35 @@ html{
         margin: 5mm;  /* this affects the margin in the printer settings */
     }
 
+body{
+	background: #0b7cec!important;
+}
+
+a {
+    color: #0b7cec;
+}
+
+.left_col {
+    background: #0b7cec!important;
+}
+
+.nav_title {
+ background: #0b7cec!important;
+}
+
+.nav.side-menu>li.active>a {
+    background: linear-gradient(#0b7cec, #0b7cec), #164573;
+}
+
+table.jambo_table thead {
+    background: #0b7cec;
+    color: #ECF0F1;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #003a73!important;
+}
+
 
 body#app-layout.nav-sm .top_nav .right_col{
 	min-height: 1250px!important;
@@ -221,7 +250,10 @@ a.prints>.btn-default {
 
 .panel {
     margin: 10px 0px 22px 0px;
-    border-radius: 4px;
+    border-radius: 10px;
+}
+.panel-body {
+    border-radius: 10px;
 }
 .panel-body{ padding: 22px;}
    
